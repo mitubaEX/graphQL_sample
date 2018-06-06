@@ -10,6 +10,8 @@ import (
 )
 
 func executeQuery(query string, schema graphql.Schema) *graphql.Result {
+
+	// schema と もらってきたqueryを入れて，実行
 	result := graphql.Do(graphql.Params{
 		Schema:        schema,
 		RequestString: query,
@@ -21,13 +23,18 @@ func executeQuery(query string, schema graphql.Schema) *graphql.Result {
 }
 
 func main() {
+	// /graphql のリクエストを受け取れるようにする
 	http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
+
+		// bodyの読み取り処理
 		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
 			panic(err)
 		}
-		result := executeQuery(fmt.Sprintf("%s", body), graphql_util.NewSchema())
+
+		// query 実行
+		result := executeQuery(fmt.Sprintf("%s", body), graphql_util.Schema)
 		json.NewEncoder(w).Encode(result)
 	})
 
