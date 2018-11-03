@@ -22,16 +22,16 @@ func NewUser(
 
 	// validate
 	if userName == "" {
-		return &User{"", "", "", "", ""}, errors.New("eventName is empty")
+		return &User{"", "", "", "", ""}, errors.New("userName is empty")
 	}
 	if description == "" {
 		return &User{"", "", "", "", ""}, errors.New("description is empty")
 	}
 	if photoURL == "" {
-		return &User{"", "", "", "", ""}, errors.New("location is empty")
+		return &User{"", "", "", "", ""}, errors.New("photoURL is empty")
 	}
 	if email == "" {
-		return &User{"", "", "", "", ""}, errors.New("startTime is empty")
+		return &User{"", "", "", "", ""}, errors.New("email is empty")
 	}
 
 	return &User{
